@@ -48,10 +48,26 @@ def get_country_data():
             })
 
     df = pd.DataFrame(country_dct)
+    df.set_index("name_id")
     print(df)
 
     return df
 
+def get_indicator_data(indicator_data):
+    """
+    Gets and cleans the indicator data into a dataframe indexed by country id.
+    """
+    indicator_series_list = []
+
+    for indicator in indicator_data.keys():
+        indicator_dict = {}
+        for country in indicator_data[indicator][1]:
+            indicator_dict[country['country']['id']] = country['value']
+        indicator_series = pd.Series(indicator_dict)
+        indicator_series.name = indicator
+        indicator_series_list.append(indicator_series)
+    output = pd.DataFrame(indicator_series_list).transpose()
+    return output
 
 if __name__ == "__main__":
     get_country_data()
