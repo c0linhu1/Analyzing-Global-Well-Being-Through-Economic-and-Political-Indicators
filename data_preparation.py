@@ -55,7 +55,6 @@ def get_country_data():
     for dict in country_data:
         if dict["region"]["value"] != "Aggregates":
             country_dct.append({
-                "name": dict["name"],
                 "name_id": dict["id"],
                 "region": dict["region"]["value"],
                 "region_id": dict["region"]["id"],
@@ -94,8 +93,17 @@ def get_indicator_data(indicators):
         indicator_series.name = indicator
         indicator_series_list.append(indicator_series)
     output = pd.DataFrame(indicator_series_list).transpose()
+    print(output)
     return output
+
+
+def merge_data(country_df, indicator_df):
+    """
+    """
+    
+
+
 
 if __name__ == "__main__":
     get_country_data()
-
+    get_indicator_data(indicators)
