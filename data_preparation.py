@@ -2,6 +2,22 @@ import pandas as pd
 import requests
 import json
 
+indicators = {
+    'SP.POP.TOTL': 'Population, total',
+    'NY.GNP.PCAP.CD': 'GDP Per Captia',
+    'SI.POV.DDAY': 'Poverty headcount ratio at $3.00 a day (2021 PPP)',
+    'SI.POV.GINI': 'Gini index',
+    'MS.MIL.XPND.GD.ZS': 'Military expenditure (% of GDP)',
+    'VA.EST': 'Voice and Accountability: Estimate'
+}
+
+params = {
+    'format': 'json',
+    'per_page': '300', # This makes sure all countries are returned
+    'date': '2023' #Query just one year
+}
+
+
 def get_api_url(indicator, params):
     """
     Constructs a URL for the API call, to query a given indicator and with a given set of parameters.
@@ -53,10 +69,21 @@ def get_country_data():
 
     return df
 
-def get_indicator_data(indicator_data):
+def get_indicator_data(indicators):
     """
     Gets and cleans the indicator data into a dataframe indexed by country id.
+
+    Args:
+        indicator: the indicator ID string
+
     """
+
+
+    indicator_data = {}
+    #Loop through each indicator and make an API call for each. Unfortunately, each API call can only return data for 1 indicator.
+    for indicator in indicators.keys():
+        indicator_data[indicator] = json.loads(requests.get(get_api_url(indicator, params)).text)
+
     indicator_series_list = []
 
     for indicator in indicator_data.keys():
