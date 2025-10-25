@@ -45,25 +45,28 @@ grouped bar plot
 """
 def get_country_data():
     """
-    
+    Gets country region and income level as a dataframe indexed by country id.
+
+    Args: 
+        None
+
+    Returns:
+        DataFrame with country id as index and region/incomeLevel as columns
+
     """
     response = requests.get("https://api.worldbank.org/v2/country?format=json&per_page=296")
     country_data = json.loads(response.text)[1]
 
-    country_dct = []
+    country_dct = {}
 
     for dict in country_data:
         if dict["region"]["value"] != "Aggregates":
-            country_dct.append({
-                "name_id": dict["id"],
+            country_dct[dict["iso2Code"]] = {
                 "region": dict["region"]["value"],
-                "region_id": dict["region"]["id"],
                 "incomeLevel": dict["incomeLevel"]["value"],
-                "incomeLevel_id": dict["incomeLevel"]["id"]
-            })
-
-    df = pd.DataFrame(country_dct)
-    df.set_index("name_id")
+            }
+    df = pd.DataFrame.from_dict(country_dct, orient = "index")
+                
     print(df)
 
     return df
@@ -74,6 +77,9 @@ def get_indicator_data(indicators):
 
     Args:
         indicator: the indicator ID string
+
+    Returns:
+        Dataframe with country id as index and the indicators as columns
 
     """
 
@@ -88,7 +94,10 @@ def get_indicator_data(indicators):
     for indicator in indicator_data.keys():
         indicator_dict = {}
         for country in indicator_data[indicator][1]:
-            indicator_dict[country['country']['id']] = country['value']
+            country_id = country['country']['id']
+            if len(country_id) == 2 and country_id.isalpha() and country_id.isupper():
+                indicator_dict[country_id] = country['value']
+
         indicator_series = pd.Series(indicator_dict)
         indicator_series.name = indicator
         indicator_series_list.append(indicator_series)
@@ -99,11 +108,18 @@ def get_indicator_data(indicators):
 
 def merge_data(country_df, indicator_df):
     """
+
     """
-    
+    merge_df = pd.merge(indicator_df, country_df, left_index = True,
+                         right_index = True, how = "right")
+    print(merge_df)
+    return merge_df
 
 
 
 if __name__ == "__main__":
     get_country_data()
+    country_df = get_country_data()
     get_indicator_data(indicators)
+    indicator_df = get_indicator_data(indicators)
+    merge_data(country_df, indicator_df)
