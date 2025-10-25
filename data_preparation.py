@@ -123,6 +123,5 @@ if __name__ == "__main__":
     country_df = get_country_data()
     indicator_df = get_indicator_data(indicators)
     merged_data = merge_data(country_df, indicator_df)
-    print(merged_data)
-
+    print(merged_data.head())
     merged_data.to_csv('world_bank_data_2023.csv')
