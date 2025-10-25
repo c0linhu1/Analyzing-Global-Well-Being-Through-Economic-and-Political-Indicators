@@ -2,6 +2,8 @@ import pandas as pd
 import requests
 import json
 
+
+
 indicators = {
     'SP.POP.TOTL': 'Population, total',
     'NY.GNP.PCAP.CD': 'GDP Per Captia',
@@ -108,18 +110,25 @@ def get_indicator_data(indicators):
 
 def merge_data(country_df, indicator_df):
     """
-
+    Merges country dataframe with indicator dataframe based on the country id index.
+    
+    Args:
+        country_df: DataFrame with region/income data
+        indicator_df: DataFrame with indicator data
+        
+    Returns:
+        finalized merged dataframe containing country and indicator data
     """
     merge_df = pd.merge(indicator_df, country_df, left_index = True,
                          right_index = True, how = "right")
-    print(merge_df)
     return merge_df
 
 
 
 if __name__ == "__main__":
-    get_country_data()
     country_df = get_country_data()
-    get_indicator_data(indicators)
     indicator_df = get_indicator_data(indicators)
-    merge_data(country_df, indicator_df)
+    merged_data = merge_data(country_df, indicator_df)
+    print(merged_data)
+
+    merged_data.to_csv('world_bank_data_2023.csv')
