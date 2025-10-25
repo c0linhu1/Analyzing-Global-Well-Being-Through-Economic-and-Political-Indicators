@@ -6,7 +6,7 @@ import json
 
 indicators = {
     'SP.POP.TOTL': 'Population, total',
-    'NY.GNP.PCAP.CD': 'GDP Per Captia',
+    'NY.GNP.PCAP.CD': 'GDP Per Capita',
     'SI.POV.DDAY': 'Poverty headcount ratio at $3.00 a day (2021 PPP)',
     'SI.POV.GINI': 'Gini index',
     'MS.MIL.XPND.GD.ZS': 'Military expenditure (% of GDP)',
