@@ -63,7 +63,7 @@ def get_country_data():
             }
     df = pd.DataFrame.from_dict(country_dct, orient = "index")
                 
-    print(df)
+    #print(df)
 
     return df
 
@@ -98,7 +98,7 @@ def get_indicator_data(indicators):
         indicator_series.name = indicator
         indicator_series_list.append(indicator_series)
     output = pd.DataFrame(indicator_series_list).transpose()
-    print(output)
+    #print(output)
     return output
 
 
