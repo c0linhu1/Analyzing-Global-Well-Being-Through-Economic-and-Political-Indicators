@@ -38,13 +38,7 @@ def get_api_url(indicator, params):
         url = url + param + '=' + params[param] + '&'
     return url
 
-"""
-You said you want the region only - are you thinking that were gonna group the countries by region and 
-use one of the indicators and then get like the mean of that indicator for each region and then do like a 
-grouped bar plot
-- if so then after we merge, ill groupby region 
 
-"""
 def get_country_data():
     """
     Gets country region and income level as a dataframe indexed by country id.
