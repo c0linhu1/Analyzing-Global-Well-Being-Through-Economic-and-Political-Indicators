@@ -1,6 +1,6 @@
 # Analyzing Global Well-Being Through Economic and Political Indicators
 
-## 📊 Project Overview
+## Project Overview
 A group data science project that analyzes the relationship between economic factors and political well-being using World Bank development indicators and machine learning models such as linear regression, polynomial regression, and K-Nearest Neighbors. We use these machine learning models and see which is the best model when predicting Voice & Accountability scores (VA.EST) based off of the three economic indicators of GDP per Capita (NY.GDP.PCAP.CD), Military expenditure (% of GDP) (MS.MIL.XPND.GD.ZS), and Total Population (SP.POP.TOTL)
 
 ### Key Questions
@@ -8,7 +8,7 @@ A group data science project that analyzes the relationship between economic fac
 - Which machine learning model best predicts governance quality from economic data?
 - Is there a correlation between economic/political indicators and predicted region?
 
-## 🎯 Features
+## Features
 
 - **Multi-model Machine Learning**: Implementation of Linear Regression, Polynomial Regression, and KNN algorithms
 - **World Bank API Integration**: Direct data retrieval from World Bank indicators
@@ -16,7 +16,7 @@ A group data science project that analyzes the relationship between economic fac
 - **Reproducible Pipeline**: Modular code structure for data preparation, analysis, and visualization
 
 
-## 📈 Machine Learning Models
+## Machine Learning Models
 
 ### Linear Regression
 - Baseline model using economic indicators as features
@@ -50,12 +50,15 @@ A group data science project that analyzes the relationship between economic fac
 - Additional economic and social indicators were incorporated when originally cleaning the data but 
   could not be incorporated in the ml models due to the amount of null values 
 
-## 🔍 Key Findings
-- 
+## Key Findings
+- Multiple Linear Regression was shown to be the superior model when predicting Voice and Accountability Scores
+  solely based off of R² and MSE values. However, polynomial regression model's plots showed slightly better 
+  performance when demonstrating better homoscedasticity.
+- KNN model was fairly accurate when predicting region for countries based off of our previously listed indicators. 
 - More shown in Final Report 
 - All visualization shown in Final Report as well as Jupyter Notebooks
 
-## 👥 Contributors
+## Contributors
 
 - **Colin Hui** - [@c0linhu1](https://github.com/c0linhu1)
 - **Derek Aslan** - [@WiseHunter42](https://github.com/WiseHunter42)
